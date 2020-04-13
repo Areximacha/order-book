@@ -14,7 +14,7 @@ A mini build of a small React based application that takes streaming Order Book 
 
 # Build choices
 
-Quickly threw together an express node server to interface directly with the BitStamp API and get around that pesky CORS.
+Implemented an express node server to interface directly with the BitStamp API. The app can also be served from there after it's been compiled to the /dist directory.
 On launch, the app immediately fetches a list of intrument pairs from the API endpoint provided and defaults selected intrument to the first on the list. It will then connect the provided websocket and subscribe to the default channel.
 Limited unit testing has been included on the component level using React Testing Library. Higher level testing has not been included as mocking the API and websocket may have become time consuming.
 Styling is done with css-in-js using emotion.

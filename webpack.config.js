@@ -2,7 +2,6 @@ const HtmlWebPackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
-    polyfill: './src/polyfill.js',
     app: './src/index.js',
   },
   module: {
@@ -30,7 +29,6 @@ module.exports = {
       filename: './index.html',
     }),
   ],
-  devtool: 'eval-source-map',
   devServer: {
     historyApiFallback: true,
     proxy: {

@@ -19,13 +19,17 @@ const OrderBook = ({ currentPair }) => {
   const prevPair = usePrevious(currentPair)
   useEffect(() => {
     socket.onmessage = (event) => {
-      if (event.data) {
-        const {
-          data: { bids = [], asks = [] },
-        } = JSON.parse(event.data)
+      try {
+        if (event.data) {
+          const {
+            data: { bids = [], asks = [] },
+          } = JSON.parse(event.data)
 
-        setBidsState(bids)
-        setAsksState(asks)
+          setBidsState(bids)
+          setAsksState(asks)
+        }
+      } catch (err) {
+        setError(err)
       }
     }
 
@@ -40,29 +44,16 @@ const OrderBook = ({ currentPair }) => {
 
   useEffect(() => {
     if (socket.readyState === socket.OPEN) {
-      unsubscribeFromChannel(prevPair)
-      subscribeToChannel(currentPair)
+      sendToChannel(prevPair, false)
+      sendToChannel(currentPair, true)
     }
   }, [currentPair])
 
-  const subscribeToChannel = (channel) => {
+  const sendToChannel = (channel, subscribe) => {
     if (channel) {
       socket.send(
         JSON.stringify({
-          event: 'bts:subscribe',
-          data: {
-            channel: `order_book_${channel}`,
-          },
-        })
-      )
-    }
-  }
-
-  const unsubscribeFromChannel = (channel) => {
-    if (channel) {
-      socket.send(
-        JSON.stringify({
-          event: 'bts:unsubscribe',
+          event: `${subscribe ? `bts:subscribe` : `bts:unsubscribe`}`,
           data: {
             channel: `order_book_${channel}`,
           },
