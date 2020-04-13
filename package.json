@@ -1,0 +1,65 @@
+{
+  "name": "order_book",
+  "version": "1.0.0",
+  "description": "order book",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --open --mode development",
+    "server": "nodemon ./server/server.js",
+    "lint": "echo \"Linting...\"; eslint \"src/**/*.js\"",
+    "pretty": "echo \"Making it pretty...\"; prettier --write \"src/**/*.js\"",
+    "jest": "echo \"Testing...\"; jest",
+    "jest:watch": "npm run jest -- --watch -o",
+    "jest:updateSnapshots": "npm run jest -- -u",
+    "precommit": "lint-staged && npm run jest"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint",
+      "npm run pretty",
+      "git add"
+    ]
+  },
+  "author": "Jay Tang",
+  "license": "ISC",
+  "dependencies": {
+    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "isomorphic-fetch": "^2.2.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/react": "^10.0.2",
+    "babel-jest": "^25.3.0",
+    "babel-loader": "^8.1.0",
+    "core-js": "^3.6.5",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.2.0",
+    "husky": "^4.2.5",
+    "jest": "^25.3.0",
+    "jest-fetch-mock": "^3.0.3",
+    "nodemon": "^2.0.3",
+    "prettier": "^2.0.4",
+    "regenerator-runtime": "^0.13.5",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
